@@ -1,7 +1,6 @@
 /*название и продолжительность самого длительного трека;*/
-SELECT name AS song_name, duration AS song_length FROM songs
-ORDER BY duration DESC 
-LIMIT 1;
+select name, duration from songs
+where duration = (select max(duration) from songs);
 
 /*название треков, продолжительность которых не менее 3,5 минуты;*/
 SELECT name AS song_name FROM songs
