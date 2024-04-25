@@ -14,12 +14,14 @@ LEFT JOIN album a ON s.album_id = a.id
 group by a.id;
 
 /*все исполнители, которые не выпустили альбомы в 2020 году;*/
-select name from bands b2 
-except
-select b.name from bandalbum ba
-join album a on a.id = ba.album_id
-join bands b on b.id = ba.band_id 
-where a.year_of = 2020
+  
+select name from bands b2  
+left join album a on a.id = ba.album_id
+left join bands b on b.id = ba.band_id 
+where name not in (select name from bandalbum  where release_date >= '2020.01.01' and release_date < '2021.01.01');
+
+
+  
 
 /*названия сборников, в которых присутствует конкретный исполнитель (выберите сами);*/
 SELECT distinct coll.name FROM collection coll 
